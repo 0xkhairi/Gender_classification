@@ -6,9 +6,9 @@ from sklearn.metrics import accuracy_score
 import numpy as np
 
 # CHALLENGE - create 3 more classifiers...
-# 1 SVM
-# 2 linear_model
-# 3 neighbors
+# 1 SVM (Support Vector Machines)
+# 2 linear_model (Perceptron)
+# 3 KNeighborsClassifier (Nearest Neighbors)
 
 # [height, weight, shoe_size]
 X = [[181, 80, 44], [177, 70, 43], [160, 60, 38], [154, 54, 37], [166, 65, 40],
