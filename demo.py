@@ -1,11 +1,14 @@
 from sklearn import tree
-
-clf = tree.DecisionTreeClassifier()
+from sklearn.svm import SVC
+from sklearn.linear_model import Perceptron
+from sklearn.neighbors import KNeighborsClassifier
+from sklearn.metrics import accuracy_score
+import numpy as np
 
 # CHALLENGE - create 3 more classifiers...
-# 1
-# 2
-# 3
+# 1 SVM
+# 2 linear_model
+# 3 neighbors
 
 # [height, weight, shoe_size]
 X = [[181, 80, 44], [177, 70, 43], [160, 60, 38], [154, 54, 37], [166, 65, 40],
@@ -14,13 +17,40 @@ X = [[181, 80, 44], [177, 70, 43], [160, 60, 38], [154, 54, 37], [166, 65, 40],
 
 Y = ['male', 'male', 'female', 'female', 'male', 'male', 'female', 'female',
      'female', 'male', 'male']
+# Classifiers
+
+clf_tree = tree.DecisionTreeClassifier()
+clf_svm = SVC()
+clf_perceptron = Perceptron()
+clf_KNN = KNeighborsClassifier()
+
+# Train the modules on our data
+clf_tree.fit(X, Y)
+clf_svm.fit(X,Y)
+clf_perceptron.fit(X, Y)
+clf_KNN.fit(X, Y)
+
+#Predictions 
+# CHALLENGE compare their results and print the best one!
+
+pred_tree = clf_tree.predict(X)
+acc_tree = accuracy_score(Y, pred_tree) * 100
+print('Accuracy for DecisionTree:{}'.format(acc_tree))
+
+pred_svm = clf_svm.predict(X)
+acc_svm = accuracy_score(Y, pred_svm) * 100
+print('Accuracy for SVM:{}'.format(acc_svm))
 
 
-# CHALLENGE - ...and train them on our data
-clf = clf.fit(X, Y)
+pred_per = clf_perceptron.predict(X)
+acc_per = accuracy_score(Y, pred_per) * 100
+print('Accuracy for perceptron: {}'.format(acc_per))
 
-prediction = clf.predict([[190, 70, 43]])
+pred_KNN = clf_KNN.predict(X)
+acc_KNN = accuracy_score(Y, pred_KNN) * 100
+print('Accuracy for KNN: {}'.format(acc_KNN))
 
-# CHALLENGE compare their reusults and print the best one!
-
-print(prediction)
+# The best classifier from svm, per, KNN
+index = np.argmax([acc_svm, acc_per, acc_KNN])
+classifiers = {0: 'SVM', 1: 'Perceptron', 2: 'KNN'}
+print('Best gender classifier is: {}'.format(classifiers[index]))
